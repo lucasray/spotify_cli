@@ -23,6 +23,7 @@ Lots! PRs are welcome. Some initial TODOs:
 - Selecting a track is done by entering the track number right now. Move selection logic to arrow keys or something
 - Uses applescript to play the selected tracks. Abstract this, or make something more general. (but how?)
 - Add caching
+- BETTER ERROR HANDLING. like omg, I have none of it
 
 ## Notes
 
