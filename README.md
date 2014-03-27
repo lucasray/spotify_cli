@@ -24,6 +24,7 @@ Lots! PRs are welcome. Some initial TODOs:
 - Uses applescript to play the selected tracks. Abstract this, or make something more general. (but how?)
 - Add caching
 - BETTER ERROR HANDLING. like omg, I have none of it
+- Add more interactive mode. Explore applescript, maybe there's a way to e.g. tell how far into a track you are? Would be cool to have a status bar like: `[====>    ]` for song status, or at least something like `3:22 / 5:11`
 
 ## Notes
 
