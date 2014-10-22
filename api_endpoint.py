@@ -16,6 +16,25 @@ _BY_TRACK = 'track'
 _BY_ARTIST = 'artist'
 _BY_ALBUM = 'album'
 _IN_JSON = '.json'
+_COLORS = {
+  'black'       : '\x1B[0;30m',
+  'red'         : '\x1B[0;31m',
+  'green'       : '\x1B[0;32m',
+  'yellow'      : '\x1B[0;33m',
+  'blue'        : '\x1B[0;34m',
+  'purple'      : '\x1B[0;35m',
+  'cyan'        : '\x1B[0;36m',
+  'light_grey'  : '\x1B[0;37m',
+  'dark_grey'   : '\x1B[1;30m',
+  'bold_red'    : '\x1B[1;31m',
+  'bold_green'  : '\x1B[1;32m',
+  'bold_yellow' : '\x1B[1;33m',
+  'bold_blue'   : '\x1B[1;34m',
+  'bold_purple' : '\x1B[1;35m',
+  'bold_cyan'   : '\x1B[1;36m',
+  'white'       : '\x1B[1;37m'
+}
+_TERMINAL_COLOR = '\x1B[0m'
 
 _PAGE_SIZE = 10
 
@@ -36,11 +55,17 @@ def searchByTrack(track):
   for track in page:
     index += 1
     try:
-      print "  {}. {} - {}".format(index, track['name'], track['artists'][0]['name'])
+      trackName = colorize(track['name'], 'cyan')
+      trackArtist = colorize(track['artists'][0]['name'], 'green')
+      print "  {:2d}. {} - {}".format(index, trackName, trackArtist)
     except UnicodeEncodeError:
-      print "  {}. Error".format(index)
+      print "  {:2d}. Error".format(index)
 
   promptForSelection(page)
+
+def colorize(text, color):
+  colorString = _COLORS[color]
+  return "{}{}{}".format(colorString, text, _TERMINAL_COLOR)
 
 def promptForSelection(page):
   selection = raw_input("\nSelect a track: ")
@@ -55,6 +80,9 @@ def promptForSelection(page):
     sys.exit(2)
 
   track = page[intSelection - 1]
+  playTrack(track)
+
+def playTrack(track):
   os.system("osascript -e 'tell application \"Spotify\" to play track \"{}\"'".format(track['href']))
 
 def searchByArtist(artist):
